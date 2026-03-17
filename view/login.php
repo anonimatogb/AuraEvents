@@ -7,8 +7,6 @@
 </head>
 <body>
     <form method="post">
-        <label for="nome">Nome:</label>
-        <input type="text" name="nome" required><br>
 
          <label for="email">Email:</label>
         <input type="email" name="email" required><br>
@@ -20,3 +18,18 @@
     </form>
 </body>
 </html>
+
+<?php
+require_once "../controller/usuariocontroller.php";
+require_once "../db/database.php";
+
+$UsuarioController = new UsuarioController($pdo);
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
+   
+    $UsuarioController->login($email, $senha);
+}
+?>

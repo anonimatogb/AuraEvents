@@ -19,30 +19,36 @@ class UsuarioModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function login($email, $senha)
+    {
+        $sql = "SELECT * FROM usuarios WHERE email = ? AND senha = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$email, $senha]);
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
 
-
-
-
-    public function cadastrar($nome, $email, $senha)
+    public function cadastrar($nome, $email, $senha,$cargo)
     {
         try {
-            
-            $sql = "INSERT INTO usuarios (nome, email, senha) VALUES (:nome, :email, :senha)";
+
+            $sql = "INSERT INTO usuarios (nome, email, senha, cargo) VALUES (:nome, :email, :senha, :cargo)";
             $stmt = $this->pdo->prepare($sql);
             return $stmt->execute([
                 ':nome' => $nome,
                 ':email' => $email,
                 ':senha' => $senha,
-               
+                ':cargo' => $cargo,
+
             ]);
-            
         } catch (PDOException $e) {
-   if ($e->getCode() == 23000) {
+            if ($e->getCode() == 23000) {
                 return "duplicado";
+            }
+            throw $e;
         }
-        throw $e;
-    }}
+    }
 
 
     public function editar($nome, $email, $senha, $id)

@@ -23,8 +23,8 @@
 
 <?php
 
-require_once "C:/Turma2/xampp/htdocs/AuraEvents/Controller/UsuarioController.php";
-require_once "C:/Turma2/xampp/htdocs/AuraEvents/DB/DataBase.php";
+require_once "C:/xampp/htdocs/AuraEvents/Controller/UsuarioController.php";
+require_once "C:/xampp/htdocs/AuraEvents/DB/DataBase.php";
 
 $UsuarioController = new UsuarioController($pdo);
 
@@ -33,15 +33,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $nome = $_POST['nome'];
     $email = $_POST['email'];
     $senha = $_POST['senha'];
-    $cargo = $_POST["cargo"];
+    $cargo = "cliente";
     
         
-if($resultado = $UsuarioController -> cadastrar($nome,$email,$senha) === "duplicado")
+if($resultado = $UsuarioController -> cadastrar($nome,$email,$senha,$cargo) === "duplicado")
     {            echo "<script>alert('Já existe um usuário com esse email!');</script>";
 
             } else {
                 
-                $UsuarioController -> cadastrar($nome,$email,$senha);
+                $UsuarioController -> cadastrar($nome,$email,$senha,$cargo);
         header("Location: login.php");
         exit;
     }
