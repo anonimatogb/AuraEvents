@@ -1,5 +1,5 @@
 <?php
-require_once "C:/xampp/htdocs/auraevents/Model/UsuarioModel.php";
+require_once "../Model/UsuarioModel.php";
 
 class UsuarioController
 {
@@ -13,24 +13,21 @@ class UsuarioController
     public function listar()
     {
         $usuarios = $this->usuarioModel->buscarTodos();
-        include_once "C:/Turma1/xampp/htdocs/aula_18_09_2025/MVC/View/Usuario/listar.php";
+        include_once "../listagem/listaruser.php";
         return $usuarios;
     }
+   
     public function buscarUsuario($id)
     {
         $usuario = $this->usuarioModel->buscarUsuario($id);
         return $usuario;
     }
 
-    public function cadastrar($nome, $email, $senha, $cargo)
+    public function cadastrar($nome, $email, $senha, $cargo, $telefone)
     {
-      
-        return $this->usuarioModel->cadastrar($nome, $email, $senha, $cargo);
+        return $this->usuarioModel->cadastrar($nome, $email, $senha, $cargo,$telefone);
     }
-    public function editar($nome, $email, $senha, $id)
-    {
-        $this->usuarioModel->editar($nome, $email, $senha, $id);
-    }
+ 
 
     public function login($email, $senha)
     {
@@ -67,4 +64,8 @@ class UsuarioController
         $usuario = $this->usuarioModel->deletar($id);
         return $usuario;
     }
+
+    public function atualizar($id, $nome, $email, $senha, $cargo, $telefone){
+    return $this->usuarioModel->atualizar($id, $nome, $email, $senha, $cargo, $telefone);
+}
 }

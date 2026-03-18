@@ -13,6 +13,29 @@ class UsuarioModel
         $stmt = $this->pdo->query('SELECT * FROM usuarios');
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function atualizar($id, $nome, $email, $senha, $cargo, $telefone)
+    {
+        $sql = "UPDATE usuarios 
+            SET nome = :nome,
+                email = :email,
+                senha = :senha,
+                cargo = :cargo,
+                telefone = :telefone
+            WHERE id = :id";
+
+        $stmt = $this->pdo->prepare($sql);
+
+        return $stmt->execute([
+            ':id' => $id,
+            ':nome' => $nome,
+            ':email' => $email,
+            ':senha' => $senha,
+            ':cargo' => $cargo,
+            ':telefone' => $telefone,
+        ]);
+    }
+
+
     public function buscarUsuario($id): array
     {
         $stmt = $this->pdo->query("SELECT * FROM usuarios WHERE id = $id");
@@ -29,17 +52,18 @@ class UsuarioModel
     }
 
 
-    public function cadastrar($nome, $email, $senha,$cargo)
+    public function cadastrar($nome, $email, $senha, $cargo, $telefone)
     {
         try {
 
-            $sql = "INSERT INTO usuarios (nome, email, senha, cargo) VALUES (:nome, :email, :senha, :cargo)";
+            $sql = "INSERT INTO usuarios (nome, email, senha, cargo, telefone) VALUES (:nome, :email, :senha, :cargo, :telefone)";
             $stmt = $this->pdo->prepare($sql);
             return $stmt->execute([
                 ':nome' => $nome,
                 ':email' => $email,
                 ':senha' => $senha,
                 ':cargo' => $cargo,
+                ':telefone' => $telefone,
 
             ]);
         } catch (PDOException $e) {

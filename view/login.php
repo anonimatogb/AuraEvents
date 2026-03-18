@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <form method="post">
@@ -15,6 +16,8 @@
         <input type="password" name="senha" required><br>
 
         <input type="submit">
+
+        <a href="cadastro.php">Cadastrar-se</a>
     </form>
 </body>
 </html>
@@ -29,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $email = $_POST['email'];
     $senha = $_POST['senha'];
-   
     $UsuarioController->login($email, $senha);
 }
 ?>

@@ -1,10 +1,22 @@
+<?php
+session_start();
+
+
+require_once "../controller/usuariocontroller.php";
+require_once "../db/database.php";
+
+if(!isset($_SESSION['cargo']) || $_SESSION['cargo'] !== "admin" ){
+    header("Location: login.php");
+    exit();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
-    <link rel="stylesheet" href="../style.css">
+    <title>Admin</title>
 </head>
 <body>
     <form method="post">
@@ -22,7 +34,7 @@
 
         <input type="submit">
 
-        <a href="login.php">Já tenho cadastro</a>
+        <a href="../view/admin.php">Voltar</a>
     </form>
 </body>
 </html>
@@ -49,7 +61,7 @@ if($resultado = $UsuarioController -> cadastrar($nome,$email,$senha,$cargo,$tele
             } else {
                 
                 $UsuarioController -> cadastrar($nome,$email,$senha,$cargo,$telefone);
-        header("Location: login.php");
+        header("Location: ../view/admin.php");
         exit;
     }
     
