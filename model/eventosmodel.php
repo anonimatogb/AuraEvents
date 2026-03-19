@@ -15,7 +15,7 @@ class EventosModel
     }
     public function buscareventos($id): array
     {
-        $stmt = $this->pdo->query("SELECT * FROM eventos WHERE id_evento = $id");
+        $stmt = $this->pdo->query("SELECT * FROM eventos WHERE id = $id");
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 

@@ -33,14 +33,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Usuário</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
+<body>
 
-
-
-
-<form method="POST">
+    <form method="POST">
     Nome: <input type="text" name="nome" value="<?= $usuario['nome'] ?>"><br><br>
     Email: <input type="email" name="email" value="<?= $usuario['email'] ?>"><br><br>
     Senha: <input type="text" name="senha" value="<?= $usuario['senha'] ?>"><br><br>
@@ -59,3 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <button type="submit">Atualizar</button>
     <a href="../view/admin.php" class="btn-voltar">Voltar</a>
 </form>
+
+</body>
+</html>

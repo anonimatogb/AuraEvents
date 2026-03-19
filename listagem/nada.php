@@ -1,8 +1,8 @@
 <?php
 require_once "../db/database.php";
 
-echo "<div class='container'>";
 echo "<section id='eventos'>";
+echo "<br>";
 echo "<h1>Eventos</h1>";
 
 if(empty($eventos)){
@@ -28,7 +28,7 @@ echo "<thead>
       <tbody>";
 
 foreach($eventos as $evento){
-    $id = $evento['id_evento'];
+    $id = $evento['id'];
     echo "<tr>";
     echo "<td>{$id}</td>";
     echo "<td>{$evento['nome']}</td>";
@@ -39,7 +39,7 @@ foreach($eventos as $evento){
 
     // Contagem de inscritos
     $stmtCount = $pdo->prepare("SELECT COUNT(*) as total_inscritos FROM inscricoes WHERE id_evento = ?");
-    $stmtCount->execute([$evento['id_evento']]);
+    $stmtCount->execute([$evento['id']]);
     $totalInscritos = $stmtCount->fetch()['total_inscritos'];
 
     echo "<td>";
@@ -49,21 +49,21 @@ foreach($eventos as $evento){
     // Verifica se o usuário já está inscrito
     $usuario_id = $_SESSION['usuario_id'];
     $stmt = $pdo->prepare("SELECT * FROM inscricoes WHERE id_usuario = ? AND id_evento = ?");
-    $stmt->execute([$usuario_id, $evento['id_evento']]);
+    $stmt->execute([$usuario_id, $evento['id']]);
     $jaInscrito = $stmt->rowCount() > 0;
 
-    // Botão de participar / cancelar com bloqueio se estiver lotado
+    // Botão de inscrever-se / cancelar com bloqueio se estiver lotado
     echo "<td>";
     if ($jaInscrito) {
-        echo "<a href='../view/desinscrever.php?id={$evento['id_evento']}' class='btn cancelar' 
+        echo "<a href='../view/desinscrever.php?id={$evento['id']}' class='btn cancelar' 
                  onclick=\"return confirm('Deseja sair deste evento?')\">
                  Cancelar inscrição
               </a>";
     } elseif ($totalInscritos >= $evento['max_participantes']) {
         echo "<span class='evento-lotado'>Evento lotado</span>";
     } else {
-        echo "<a href='../view/inscrever.php?id={$evento['id_evento']}' class='btn participar' >
-                 Participar
+        echo "<a href='../view/inscrever.php?id={$evento['id']}' class='btn participar' >
+                 Inscrever-se
               </a>";
     }
     echo "</td>";
@@ -73,5 +73,5 @@ foreach($eventos as $evento){
 
 echo "</tbody></table>";
 echo "</section>";
-echo "</div>";
+
 ?>
