@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
     <link rel="stylesheet" href="../style.css">
+    <style>
+    a{
+margin-left:16vh;
+}
+        </style>
 </head>
 <body>
     <form method="post">

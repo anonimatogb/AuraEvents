@@ -20,6 +20,24 @@ if(!isset($_SESSION['cargo']) || $_SESSION['cargo'] == "admin" ){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Início</title>
     <link rel="stylesheet" href="../style.css">
+    <style>
+       table a {
+  display: inline-block;
+  margin-bottom: 30px;
+  padding: 10px 16px;
+  background: #ef4444;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+table a:hover {
+  background: #dc2626;
+  transform: translateY(-2px);
+}
+    </style>
 </head>
 <body>
     <nav>

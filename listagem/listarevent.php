@@ -28,7 +28,7 @@ echo "<thead>
       <tbody>";
 
 foreach($eventos as $evento){
-    $id = $evento['id_evento'];
+    $id = $evento['id'];
     echo "<tr>";
     echo "<td>{$id}</td>";
     echo "<td>{$evento['nome']}</td>";

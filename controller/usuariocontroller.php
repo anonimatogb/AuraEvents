@@ -55,7 +55,7 @@ class UsuarioController
 
         } else {
 
-            echo "Email ou senha inválidos";
+            echo "<script>alert('Erro: Senha ou email errado!');</script>";
         }
     }
 
