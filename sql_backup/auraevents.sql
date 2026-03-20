@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 17/03/2026 às 03:48
+-- Tempo de geração: 20/03/2026 às 11:44
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -23,14 +23,6 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
-
-
-CREATE TABLE `inscricoes` (
-  `id` int(11) NOT NULL,
-  `id_usuario` int(11) NOT NULL,
-  `id_evento` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 --
 -- Estrutura para tabela `eventos`
 --
@@ -43,6 +35,18 @@ CREATE TABLE `eventos` (
   `horario` time NOT NULL,
   `local_evento` varchar(255) NOT NULL,
   `max_participantes` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `inscricoes`
+--
+
+CREATE TABLE `inscricoes` (
+  `id` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `id_evento` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -64,8 +68,8 @@ CREATE TABLE `usuarios` (
 -- Despejando dados para a tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `cargo`) VALUES
-(1, 'Admin', 'admin@gmail.com', '123', 'admin');
+INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `cargo`, `telefone`) VALUES
+(1, 'Admin', 'admin@gmail.com', '123', 'admin', '');
 
 --
 -- Índices para tabelas despejadas
@@ -82,7 +86,7 @@ ALTER TABLE `eventos`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD UNIQUE KEY `email` (`email`,`telefone`) USING BTREE;
 
 --
 -- AUTO_INCREMENT para tabelas despejadas
@@ -91,10 +95,6 @@ ALTER TABLE `usuarios`
 --
 -- AUTO_INCREMENT de tabela `eventos`
 --
---
-ALTER TABLE `inscricoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 ALTER TABLE `eventos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
@@ -102,7 +102,7 @@ ALTER TABLE `eventos`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
