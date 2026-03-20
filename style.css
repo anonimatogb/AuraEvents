@@ -76,7 +76,7 @@ form a:focus{
 form a{
   color: #38bdf8;
 }
-form button {
+form button, form a {
   background: #38bdf8;
   color: white;
   border: none;
@@ -125,4 +125,7 @@ table tbody tr:hover {
 
 table tbody tr:nth-child(even) {
   background: #f8fafc;
+}
+a{
+  text-decoration: none;
 }
