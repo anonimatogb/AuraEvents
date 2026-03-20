@@ -23,6 +23,14 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
+
+
+CREATE TABLE `inscricoes` (
+  `id` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `id_evento` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 --
 -- Estrutura para tabela `eventos`
 --
@@ -82,6 +90,10 @@ ALTER TABLE `usuarios`
 --
 -- AUTO_INCREMENT de tabela `eventos`
 --
+--
+ALTER TABLE `inscricoes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 ALTER TABLE `eventos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
