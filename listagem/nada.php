@@ -1,5 +1,6 @@
 <?php
 require_once "../db/database.php";
+require_once "../model/inscricaomodel.php";
 
 echo "<section id='eventos'>";
 echo "<br>";
@@ -30,7 +31,7 @@ echo "<thead>
 foreach($eventos as $evento){
     $id = $evento['id'];
     echo "<tr>";
-    echo "<td>{$id}</td>";
+    echo "<td>#sd{$id}</td>";
     echo "<td>{$evento['nome']}</td>";
     echo "<td>{$evento['descricao']}</td>";
     echo "<td>{$evento['data_evento']}</td>";
@@ -38,19 +39,16 @@ foreach($eventos as $evento){
     echo "<td>{$evento['local_evento']}</td>";
 
     // Contagem de inscritos
-    $stmtCount = $pdo->prepare("SELECT COUNT(*) as total_inscritos FROM inscricoes WHERE id_evento = ?");
-    $stmtCount->execute([$evento['id']]);
-    $totalInscritos = $stmtCount->fetch()['total_inscritos'];
+    $inscricaoModel = new InscricaoModel($pdo);
+    $totalInscritos = $inscricaoModel->getCountInscritos($evento['id']);
 
     echo "<td>";
     echo "Inscritos: {$totalInscritos} / {$evento['max_participantes']}";
     echo "</td>";
 
     // Verifica se o usuário já está inscrito
-    $usuario_id = $_SESSION['usuario_id'];
-    $stmt = $pdo->prepare("SELECT * FROM inscricoes WHERE id_usuario = ? AND id_evento = ?");
-    $stmt->execute([$usuario_id, $evento['id']]);
-    $jaInscrito = $stmt->rowCount() > 0;
+    $usuario_id = $_SESSION['usuario_id'] ?? 0;
+    $jaInscrito = $inscricaoModel->isInscrito($usuario_id, $evento['id']);
 
     // Botão de inscrever-se / cancelar com bloqueio se estiver lotado
     echo "<td>";

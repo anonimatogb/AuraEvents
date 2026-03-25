@@ -143,22 +143,28 @@ button:hover {
     <h1>Bem-vindo, <?php echo $_SESSION['usuario_nome']; ?>!</h1>
     <a href="logout.php">Sair</a>
 
-
-
-
+   
 
 </body>
 </html>
 <?php
 
-
+    require_once "../controller/inscricaocontroller.php";
 require_once "../Controller/EventosController.php";
 
 $EventosController = new EventosController($pdo);
 $UsuarioController = new UsuarioController($pdo);
 
 $usuarios = $UsuarioController->listar();
+echo "<br>";
+echo "<br>";
 $eventos = $EventosController->listar();
+echo "<br>";
+echo "<br>";
+ // Listagem Inscrições
+    $InscricaoController = new InscricaoController($pdo);
+    $inscricoes = $InscricaoController->listar();
+    include "../listagem/listarinscricoes.php";
+    ?>
 
 
-?>

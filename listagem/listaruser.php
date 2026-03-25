@@ -29,7 +29,7 @@ echo "<thead>
 foreach($usuarios as $usuario){
     $id = $usuario['id'];
     echo "<tr>";
-    echo "<td>{$id}</td>";
+    echo "<td>#{$id}</td>";
     echo "<td>{$usuario['nome']}</td>";
     echo "<td>{$usuario['email']}</td>";
     echo "<td>{$usuario['senha']}</td>";

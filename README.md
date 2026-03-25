@@ -36,13 +36,16 @@ AuraEvents/
 - **Fluxo MVC:** As views chamam controladores, que interagem com modelos para CRUD no banco via `db/database.php`.
 - **Usuários:** Cadastro (`cadastrousuario.php`), listagem, edição, exclusão, login/logout.
 - **Eventos:** Cadastro (`cadastroevento.php`), listagem (`listarevent.php`), edição, exclusão.
-- **Inscrição:** 
-  - `inscrever.php`: Inscreve usuário em evento.
-  - `desinscrever.php`: Remove inscrição.
-- **Admin:** Painel em `admin.php` para gerenciar tudo.
+- **Inscrição/Desinscrição:** 
+  - `view/inscrever.php` → `controller/inscricaocontroller.php::inscrever()` → `model/inscricaomodel.php`
+  - `view/desinscrever.php` → `controller/inscricaocontroller.php::desinscrever()` → `model/inscricaomodel.php`
+  - Refatorado para MVC completo (model/controller/views limpos).
+- **Admin:** Painel em `admin.php` para gerenciar tudo (usa `listagem/nada.php` refatorado).
 
-### Decisão sobre Inscritos
-Optei por **não criar um controller e model específicos para "inscritos"**, pois achei mais viável integrar essa funcionalidade diretamente nos models e controllers existentes de usuários e eventos. Inscrições são relações diretas no banco (tabela pivot users-events), evitando redundância, complexidade desnecessária e mantendo o código simples e escalável.
+**Estrutura MVC expandida:**
+- `model/inscricaomodel.php`: CRUD inscrições, helpers (isInscrito, count).
+- `controller/inscricaocontroller.php`: Lógica de negócio.
+- `listagem/nada.php`: Usa model para checks/contagens eficientes.
 
 ## Problemas Comuns
 - Erros de conexão: Verifique credenciais em `db/database.php`.
