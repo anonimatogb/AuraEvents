@@ -48,13 +48,16 @@ class EventosModel
 
     public function deletar($id)
     {
-        $sql = "DELETE FROM eventos WHERE id_evento = ?";
+        // Deleta inscrições relacionadas primeiro (cascade)
+        $inscrSql = "DELETE FROM inscricoes WHERE id_evento = ?";
+        $inscrStmt = $this->pdo->prepare($inscrSql);
+        $inscrStmt->execute([$id]);
+        
+        // Deleta o evento
+        $sql = "DELETE FROM eventos WHERE id = ?";
         $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute([
-            $id
-        ]);
-    
-        }
+        return $stmt->execute([$id]);
+    }
 
 
     public function atualizar($id, $nome, $descricao, $data_evento, $horario, $local_evento, $max_participantes)
