@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 25/03/2026 às 12:57
+-- Tempo de geração: 25/03/2026 às 13:56
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -44,7 +44,12 @@ CREATE TABLE `eventos` (
 INSERT INTO `eventos` (`id`, `nome`, `descricao`, `data_evento`, `horario`, `local_evento`, `max_participantes`) VALUES
 (1, 'Festa', 'Irá acontecer uma reunião de jovens adolescentes em uma certa residência perto do padilha', '2026-03-21', '10:05:00', 'Casa do tata', 5),
 (2, 'Expo 2025', 'o evento conta com uma programação diversificada de shows musicais com artistas renomados, praça de alimentação com comidas típicas e atrações para toda a família. A Expo também movimenta a economia local, atraindo visitantes de diversas cidades e promovendo o turismo regional.', '2026-03-28', '18:30:00', 'Centro Convergência', 10),
-(3, 'Dia de Desenvolvimento Pessoal', 'Este é um evento exclusivo, planejado para uma única pessoa que deseja investir em si mesma, buscando crescimento pessoal, equilíbrio e bem-estar.', '2026-03-29', '05:10:00', 'casa do tata', 1);
+(3, 'Dia de Desenvolvimento Pessoal', 'Este é um evento exclusivo, planejado para uma única pessoa que deseja investir em si mesma, buscando crescimento pessoal, equilíbrio e bem-estar.', '2026-03-29', '05:10:00', 'casa do tata', 1),
+(4, 'Workshop de Programação', 'Evento focado em desenvolvimento web, com prática em PHP, HTML e banco de dados.', '2026-04-05', '14:00:00', 'Sala Tech', 15),
+(5, 'Noite de Jogos', 'Evento descontraído com jogos de tabuleiro, videogame e interação entre os participantes.', '2026-04-10', '19:30:00', 'Espaço Jovem', 20),
+(6, 'Palestra de Empreendedorismo', 'Uma palestra motivacional sobre como iniciar um negócio e crescer no mercado.', '2026-04-12', '18:00:00', 'Auditório Central', 50),
+(7, 'Treinamento Fitness', 'Sessão de treino coletivo com acompanhamento profissional.', '2026-04-08', '07:00:00', 'Academia Corpo Ativo', 10),
+(8, 'Sessão de Cinema Exclusiva', 'Evento para uma única pessoa assistir a um filme em ambiente privado.', '2026-04-15', '21:00:00', 'Sala VIP', 1);
 
 -- --------------------------------------------------------
 
@@ -63,10 +68,19 @@ CREATE TABLE `inscricoes` (
 --
 
 INSERT INTO `inscricoes` (`id`, `id_usuario`, `id_evento`) VALUES
-(0, 2, 1),
-(0, 2, 2),
-(0, 6, 1),
-(0, 2, 3);
+(5, 1, 4),
+(6, 2, 4),
+(7, 3, 5),
+(8, 6, 6),
+(9, 8, 7),
+(10, 2, 8),
+(11, 2, 6),
+(13, 2, 2),
+(14, 2, 1),
+(15, 2, 3),
+(16, 2, 7),
+(17, 6, 7),
+(18, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -91,7 +105,12 @@ INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `cargo`, `telefone`) VAL
 (1, 'Admin', 'admin@gmail.com', '123', 'admin', ''),
 (2, 'Gabriel', 'gabrielcavalcante22@gmail.com', '123', 'cliente', '1323214'),
 (6, 'Dhiogo', 'dhiogo@dhiogo', '12345', 'cliente', '18 99999-9999'),
-(8, 'Vitor Hugo', 'vitor@vitor', '213', 'admin', '18 99999-9991');
+(8, 'Vitor Hugo', 'vitor@vitor', '213', 'admin', '18 99999-9991'),
+(10, 'Lucas Silva', 'lucas@gmail.com', '123', 'cliente', '11 98888-1111'),
+(11, 'Mariana Souza', 'mariana@gmail.com', '123', 'cliente', '11 97777-2222'),
+(12, 'Carlos Mendes', 'carlos@gmail.com', '123', 'cliente', '11 96666-3333'),
+(13, 'Fernanda Lima', 'fernanda@gmail.com', '123', 'admin', '11 95555-4444'),
+(14, 'Rafael Costa', 'rafael@gmail.com', '123', 'cliente', '11 94444-5555');
 
 --
 -- Índices para tabelas despejadas
@@ -101,6 +120,12 @@ INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `cargo`, `telefone`) VAL
 -- Índices de tabela `eventos`
 --
 ALTER TABLE `eventos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `inscricoes`
+--
+ALTER TABLE `inscricoes`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -118,13 +143,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `eventos`
 --
 ALTER TABLE `eventos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de tabela `inscricoes`
+--
+ALTER TABLE `inscricoes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
